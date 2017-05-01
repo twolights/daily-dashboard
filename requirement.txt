@@ -1,3 +1,4 @@
 redis
 beautifulsoup4
 simplejson
+flask
