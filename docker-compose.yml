@@ -1,0 +1,26 @@
+version: "2"
+
+volumes:
+    dashboard-redis:
+        external: true
+
+services:
+    dashboard:
+        build:
+            context: .
+            dockerfile: docker/images/dashboard/Dockerfile
+        image: twolights/dashboard:latest
+        ports:
+            - "5000:5000"
+        environment:
+            - "REDIS_HOST=redis"
+            - "REDIS_PORT=6379"
+        links:
+            - "redis:redis"
+        depends_on:
+            - redis
+
+    redis:
+        image: "redis:3.2.5-alpine"
+        volumes:
+            - 'dashboard-redis:/data'
