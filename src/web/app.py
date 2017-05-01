@@ -8,7 +8,7 @@ app.debug = True
 
 @app.route('/daevanchen')
 def main():
-    currencies = ['USD', 'JPY', 'GBP']
+    currencies = ['USD', 'JPY', 'GBP', 'CNY', 'EUR']
     return render_template('index.html', currencies=currencies)
 
 @app.route('/currency/<currency>')

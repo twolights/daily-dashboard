@@ -1,4 +1,4 @@
-# Dockerized version of my simple daily dashboard (more coming)
+# Dockerized version of my simple daily dashboard (more features coming)
 
 To run:
 
