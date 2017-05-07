@@ -1,0 +1,31 @@
+<div style="width: 800px; height: 400px;">
+    <canvas id="cryptocurrency{{ currency }}"></canvas>
+    <script>
+    $.getJSON('/cryptocurrency/{{ currency }}', function(result) {
+        var ctx = document.getElementById("cryptocurrency{{ currency }}").getContext("2d");
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: result,
+            options: {
+                title: {
+                    text: '{{ currency }}',
+                    display: true,
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            color: "rgba(0, 0, 0, 0)",
+                        }
+                    }]
+                },
+            },
+        });
+    });
+    </script>
+</div>
+

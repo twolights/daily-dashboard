@@ -9,7 +9,11 @@ app.debug = True
 @app.route('/daevanchen')
 def main():
     currencies = ['USD', 'JPY', 'GBP', 'CNY', 'EUR']
-    return render_template('index.html', currencies=currencies)
+    cryptocurrencies = ['btc_usd', 'eth_usd']
+    return render_template('index.html',
+        currencies=currencies,
+        cryptocurrencies=cryptocurrencies
+    )
 
 @app.route('/currency/<currency>')
 def currency(currency):
@@ -32,6 +36,42 @@ def currency(currency):
         sell.append(rate['sell'])
     data = {
         'labels': labels,
+        'datasets': [
+            {
+                'label': 'Buy',
+                'data': buy,
+                'backgroundColor': 'rgba(100,100,255,0.8)',
+                'pointRadius': 0,
+                'pointHitRadius': 5,
+                'pointHoverRadius': 5,
+            },
+            {
+                'label': 'Sell',
+                'data': sell,
+                'backgroundColor': 'rgba(200,200,255,0.8)',
+                'pointRadius': 0,
+                'pointHitRadius': 5,
+                'pointHoverRadius': 5,
+            },
+        ]
+    }
+    return jsonify(data)
+
+@app.route('/cryptocurrency/<currency>')
+def cryptocurrency(currency):
+    REDIS_CRYPTOCURRENCY_KEY_FORMAT='cryptocurrency:%s'
+
+    key = REDIS_CRYPTOCURRENCY_KEY_FORMAT % currency
+    host, port = os.getenv('REDIS_HOST', 'localhost'), os.getenv('REDIS_PORT', 6379)
+    r = redis.Redis(host, port)
+    values = reversed(r.zrevrange(key, 0, 60))
+    buy = []
+    sell = []
+    for value in values:
+        rate = json.loads(value)
+        buy.append(rate['buy'])
+        sell.append(rate['sell'])
+    data = {
         'datasets': [
             {
                 'label': 'Buy',

@@ -19,5 +19,11 @@
 {% include('components/currency.html') %}
 {% endwith %}
 {% endfor %}
+
+{% for currency in cryptocurrencies %}
+{% with currency=currency %}
+{% include('components/cryptocurrency.html') %}
+{% endwith %}
+{% endfor %}
 </body>
 </html>
