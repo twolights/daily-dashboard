@@ -67,11 +67,14 @@ def cryptocurrency(currency):
     values = reversed(r.zrevrange(key, 0, 60))
     buy = []
     sell = []
+    labels = []
     for value in values:
         rate = json.loads(value)
+        labels.append('')
         buy.append(rate['buy'])
         sell.append(rate['sell'])
     data = {
+        'labels': labels,
         'datasets': [
             {
                 'label': 'Buy',
