@@ -79,7 +79,7 @@ def cryptocurrency(currency):
             {
                 'label': 'Buy',
                 'data': buy,
-                'backgroundColor': 'rgba(100,100,255,0.8)',
+                'backgroundColor': 'rgba(200,200,255,0.8)',
                 'pointRadius': 0,
                 'pointHitRadius': 5,
                 'pointHoverRadius': 5,
@@ -87,7 +87,7 @@ def cryptocurrency(currency):
             {
                 'label': 'Sell',
                 'data': sell,
-                'backgroundColor': 'rgba(200,200,255,0.8)',
+                'backgroundColor': 'rgba(100,100,255,0.8)',
                 'pointRadius': 0,
                 'pointHitRadius': 5,
                 'pointHoverRadius': 5,
